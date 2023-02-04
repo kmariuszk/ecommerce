@@ -1,3 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Poppins:wght@600&display=swap');
+
 * {
+    /* background-color: #21211f; */
+    color: white;
     margin: 0;
+}
+
+body {
+    background-image: linear-gradient(#21211f, #21211f);
+}
+
+/* HOMEPAGE STYLING */
+
+/* hero section */
+.homepage--hero-container {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+}
+
+.homepage--hero-image {
+    max-width: 1000px;
+    height: auto;
+}
+
+.homepage--hero-text-container {
+    max-height: 300px;
+    position: absolute;
+}
+
+.homepage--hero-title {
+    margin: 20px 0px;
+    font-size: 28px;
+    font-weight: 600;
+    font-family: 'Poppins';
+}
+
+.homepage--hero-tagline {
+    margin: 20px 0px;
+    font-size: 18px;
+    font-weight: 100;
+    font-family: 'Montserrat';
+}
+
+.homepage--action-button {
+    margin: 10px 0px;
+    margin-left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border:none;
+    padding: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+
+    color: #21211f;
+    font-size: 16px;
+    font-weight: 100;
+    font-family: 'Montserrat';
+}
+
+/* feature section */
+
+.homepage--features {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    align-content: center;
+    justify-content: center;
+}
+
+.homepage--image {
+    margin: 25px;
+    max-width: 500px;
+    height: auto;
+}
+
+.homepage--features-description {
+    text-align: center;
+    font-size: 21px;
+    font-weight: 100;
+    line-height: 30px;
+    font-family: 'Montserrat';
 }
