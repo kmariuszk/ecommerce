@@ -173,3 +173,52 @@ body {
     line-height: 30px;
     font-family: 'Montserrat';
 }
+
+/* FOOTER STYLING */
+
+.Footer--container {
+    display: flex;
+    flex-direction: row;
+    background-color: #646464;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Roboto';
+    font-size: 18px;
+}
+
+.Footer--newsletter {
+    padding: 50px;
+    flex: 2 1 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.Footer--input {
+    width: 200px;
+}
+
+.Footer--action-buttons {
+    padding: 50px;
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.Footer--social-media {
+    padding: 50px;
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.Footer-element {
+    text-decoration: none;
+    padding: 10px 0px;
+}
+
+.Footer--vertical-line {
+    width: 2px;
+    border-radius: 10px;
+    height: 200px;
+    background-color: white;
+}

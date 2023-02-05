@@ -78,6 +78,7 @@ function Header() {
       <Link className='Header--title-button' href='/' >
         <h1 className='Header--title'>TECH-HUB</h1>
       </Link>
+      
       <nav className='Header--buttons-container'>
         {actionButtons}
 
