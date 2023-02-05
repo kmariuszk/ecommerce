@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
-import { FaSearch, FaShoppingBag } from 'react-icons/fa';
-import { useState, useEffect } from 'react'
+import { AiOutlineSearch, AiOutlineShopping } from 'react-icons/ai';
+import { useState, useEffect, useRef } from 'react'
 
 const navLinks = [
   ["Home", "/"],
@@ -9,8 +9,38 @@ const navLinks = [
   ["Products", "/products"],
 ];
 
+// document.getElementByClass("Header--search-button").addEventListener("click", function() {
+//   document.getElementByClass("Header--search").focus();
+// });
+
 function Header() {
   const [isShrunk, setShrunk] = useState(false);
+  const [isSearching, setSearching] = useState(false);
+  const [query, setQuery] = useState('');
+  const inputRef = useRef(null);
+
+  function handleSearchClick() {
+    setSearching(prevSearching => !prevSearching);
+  }
+
+  function handleQueryChange(event) {
+    setQuery(event.target.value);
+  }
+
+  function handleKeyDown(event) {
+    if (event.key === 'Enter') {
+      // 👇 Get input value
+      console.log(query);
+      setQuery('');
+    }
+  };
+
+  // TODO: make user focus on the search bar when they display it.
+  // useEffect(() => {
+  //   if (isSearching) {
+  //     inputRef.current.focus();
+  //   }
+  // }, [isSearching])
 
   useEffect(() => {
     const onScroll = () => {
@@ -50,12 +80,26 @@ function Header() {
       </Link>
       <nav className='Header--buttons-container'>
         {actionButtons}
-        <FaSearch />
+
+        <input
+          className={`Header--search ${isSearching && 'active'}`}
+          type='text'
+          ref={inputRef}
+          placeholder='What are you looking for?'
+          onChange={handleQueryChange}
+          onKeyDown={handleKeyDown}
+          value={query}
+        />
+
+        <button className='Header--search-button' onClick={handleSearchClick}>
+          <AiOutlineSearch size={18} />
+        </button>
+
         <Link className='Header--shopping-bag' href='/basket'>
-          <FaShoppingBag />
+          <AiOutlineShopping size={18} />
         </Link>
       </nav>
-    </div >
+    </div>
   )
 }
 
