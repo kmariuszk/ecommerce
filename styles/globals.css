@@ -65,22 +65,25 @@ body {
 
 /* hero section */
 .homepage--hero-container {
-    margin-top: 10em;
-    display: flex;
+    margin-top: 4em;
+    /* display: flex; */
     position: relative;
-    align-items: center;
-    justify-content: center;
+    width: 100%;
+    /* align-items: center; */
+    /* justify-content: center; */
 }
 
 .homepage--hero-image {
-    max-width: 1000px;
+    width: 100%;
     height: auto;
 }
 
 .homepage--hero-text-container {
-    top: 10px;
+    /* background-color: red; */
     max-height: 300px;
     position: absolute;
+    top: 36%;
+    left: 75%;
 }
 
 .homepage--hero-title {

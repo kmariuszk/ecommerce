@@ -8,8 +8,8 @@ function index() {
   return (
     <>
       <section className='homepage--hero-container'>
-        <Image className='homepage--hero-image' alt='hero' src={hero}></Image>
-        <div className='homepage--hero-text-containger'>
+        <Image className='homepage--hero-image' alt='hero' src={hero} unoptimized={true} priority></Image>
+        <div className='homepage--hero-text-container'>
           <h1 className='homepage--hero-title'>Find Your Perfect Laptop</h1>
           <h3 className='homepage--hero-tagline'>Powerful Performance, Portability and Style</h3>
           <button className='homepage--action-button'>Explore Laptops</button>
