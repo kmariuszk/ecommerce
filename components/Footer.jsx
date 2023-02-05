@@ -1,5 +1,6 @@
 import React from 'react'
-import { AiOutlineInstagram, AiOutlineTwitter, AiOutlineFacebook } from 'react-icons/ai'
+import { AiOutlineInstagram, AiOutlineTwitter, AiOutlineFacebook } from 'react-icons/ai';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 const navLinks = [
@@ -9,6 +10,8 @@ const navLinks = [
 ];
 
 function Footer() {
+
+
   const actionButtons = navLinks.map((item, index) => (
     <Link className='Footer-element' key={index} href={item[1]}>{item[0]}</Link>
   ))
@@ -17,8 +20,10 @@ function Footer() {
     <section className='Footer'>
       <div className='Footer--container'>
         <div className='Footer--newsletter'>
-          <p>Sign Up For Newsletter!</p>
-          <input className='Footer--input'/>
+          <h3 className='Footer--newsletter-title'>Join the newsletter!</h3>
+          <p className='Footer--newsletter-description'>Subscribe to get information about new products.</p>
+          <input className='Footer--newsletter-input' placeholder='Your email address'/>
+          <button className='Footer--newsletter-button'>SUBSCRIBE</button>
         </div>
 
         <div className='Footer--vertical-line' />
@@ -30,9 +35,15 @@ function Footer() {
         <div className='Footer--vertical-line' />
 
         <div className='Footer--social-media'>
-          <AiOutlineFacebook className='Footer-element' size={40}/>
-          <AiOutlineTwitter className='Footer-element' size={40}/>
-          <AiOutlineInstagram className='Footer-element' size={40}/>
+          <Link href=''>
+            <AiOutlineFacebook className='Footer-element' size={40} />
+          </Link>
+          <Link href=''>
+            <AiOutlineTwitter className='Footer-element' size={40} />
+          </Link>
+          <Link href=''>
+            <AiOutlineInstagram className='Footer-element' size={40} />
+          </Link>
         </div>
       </div>
     </section>
