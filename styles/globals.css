@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Poppins:wght@600&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Open+Sans:wght@700&family=Poppins:wght@600&family=Roboto&display=swap');
 * {
     /* background-color: #21211f; */
     color: white;
@@ -10,10 +9,63 @@ body {
     background-image: linear-gradient(#21211f, #21211f);
 }
 
+/* HEADER STYLING */
+
+.Header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    transition: 0.6s;
+    padding: 20px 0px;
+
+    background: black;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+}
+
+.Header.Header--scrolled {
+    transition: 0.6s ease-out;
+    padding: 0px 0px;
+}
+
+.Header--scrolled .Header--title {
+    transition: 0.6s ease-in;
+    font-size: 0px;
+}
+
+.Header--title {
+    transition: 0.6s;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+}
+
+.Header--scrolled-title {
+    font-size: 0px;
+}
+
+.Header--title-button {
+    text-decoration: none;
+}
+
+.Header--action-buttons {
+    text-decoration: none;
+}
+
+.Header--buttons-container {
+    padding: 10px;
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
+
 /* HOMEPAGE STYLING */
 
 /* hero section */
 .homepage--hero-container {
+    margin-top: 10em;
     display: flex;
     position: relative;
     align-items: center;
@@ -26,6 +78,7 @@ body {
 }
 
 .homepage--hero-text-container {
+    top: 10px;
     max-height: 300px;
     position: absolute;
 }
@@ -45,18 +98,18 @@ body {
 }
 
 .homepage--action-button {
-    margin: 10px 0px;
-    margin-left: 50%;
-    transform: translateX(-50%);
+    margin: 5px 0px;
+    /* margin-left: 50%; */
+    /* transform: translateX(-50%); */
     background-color: white;
-    border:none;
-    padding: 10px;
+    border: none;
+    padding: 10px 15px;
     border-radius: 20px;
     cursor: pointer;
 
     color: #21211f;
     font-size: 16px;
-    font-weight: 100;
+    font-weight: 200;
     font-family: 'Montserrat';
 }
 
@@ -64,9 +117,13 @@ body {
 
 .homepage--features {
     display: grid;
+    grid-gap: 3px;
     grid-template-columns: auto auto auto;
     align-content: center;
+    justify-items: center;
+    align-items: center;
     justify-content: center;
+    padding: 30px;
 }
 
 .homepage--image {
