@@ -12,19 +12,41 @@ function Index({ products }) {
       <section className='homepage--hero-container'>
         <Image className='homepage--hero-image' alt='hero' src={hero} unoptimized={true} priority></Image>
         <div className='homepage--hero-text-container'>
-          <h1 className='homepage--hero-title'>Find Your Perfect Laptop</h1>
-          <h3 className='homepage--hero-tagline'>Powerful Performance, Portability and Style</h3>
-          <button className='homepage--action-button'>Explore Laptops</button>
+          <h1 className='homepage--hero-title'>
+            Find Your Perfect Laptop
+          </h1>
+          <h3 className='homepage--hero-tagline'>
+            Powerful Performance, Portability and Style
+          </h3>
+          <button className='homepage--action-button'>
+            Explore Laptops
+          </button>
         </div>
       </section>
+
       <section className='homepage--features'>
-        <Image className='homepage--headphones-image homepage--image' alt='headphones' src={headphones} />
-        <p className='homepage--features-description'>Our gaming accessories offer high-precision controls, surround sound, and ergonomic design for an immersive gaming experience. Ideal for casual and competitive gamers alike.</p>
-        <Image className='homepage--keyboard-image homepage--image' alt='keyboard' src={keyboard}></Image>
+        <Image
+          className='homepage--headphones-image homepage--image'
+          alt='headphones'
+          src={headphones}
+        />
+        <p className='homepage--features-description'>
+          Our gaming accessories offer high-precision controls, surround sound, and ergonomic design for an immersive gaming experience. Ideal for casual and competitive gamers alike.
+        </p>
+        <Image
+          className='homepage--keyboard-image homepage--image'
+          alt='keyboard'
+          src={keyboard}
+        />
       </section>
+
       <section className='homepage--best-sellers'>
-        <h1 className='homepage--best-sellers--title'>Top Selling</h1>
-        <h3 className='homepage--best-sellers--description'>This week&apos;s most popular products</h3>
+        <h1 className='homepage--best-sellers--title'>
+          Top Selling
+        </h1>
+        <h3 className='homepage--best-sellers--description'>
+          This week&apos;s most popular products
+        </h3>
         <div className='homepage--best-sellers--product-container'>
           {
             products.map((product) => (
@@ -39,9 +61,10 @@ function Index({ products }) {
           }
         </div>
       </section>
-      <secrion className='homepage--categories'>
 
-      </secrion>
+      <section className='homepage--categories'>
+          {/* TODO */}
+      </section>
     </>
   )
 }

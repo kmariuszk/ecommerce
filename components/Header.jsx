@@ -1,7 +1,9 @@
 import React from 'react'
 import Link from 'next/link'
 import { AiOutlineSearch, AiOutlineShopping } from 'react-icons/ai';
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react';
+import Cart from './Cart';
+import { useStateContext } from '../context/StateContext';
 
 const navLinks = [
   ["Home", "/"],
@@ -18,6 +20,8 @@ function Header() {
   const [isSearching, setSearching] = useState(false);
   const [query, setQuery] = useState('');
   const inputRef = useRef(null);
+
+  const { showCart, setShowCart, totalQuantities } = useStateContext();
 
   function handleSearchClick() {
     setSearching(prevSearching => !prevSearching);
@@ -78,7 +82,7 @@ function Header() {
       <Link className='Header--title-button' href='/' >
         <h1 className='Header--title'>TECH-HUB</h1>
       </Link>
-      
+
       <nav className='Header--buttons-container'>
         {actionButtons}
 
@@ -96,10 +100,16 @@ function Header() {
           <AiOutlineSearch size={18} />
         </button>
 
-        <Link className='Header--shopping-bag' href='/basket'>
+        <div
+          className='Header--shopping-bag'
+          onClick={() => {
+            setShowCart(true);
+          }}>
           <AiOutlineShopping size={18} />
-        </Link>
+        </div>
       </nav>
+
+      {showCart && <Cart />}
     </div>
   )
 }
