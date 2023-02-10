@@ -3,7 +3,7 @@ import { React, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { AiFillStar, AiOutlineStar, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
-import { useStateContext } from '../../context/StateContext';
+import { useStateContext } from '../../../context/StateContext';
 
 const myLoader = ({ src, width, quality }) => {
     return `${src}?w=${width}&q=${quality || 75}`

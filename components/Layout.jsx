@@ -10,7 +10,9 @@ function Layout({ children }) {
                 <title>TechHub</title>
             </Head>
             <Header />
-            {children}
+            <section className='layout--content-container'>
+                {children}
+            </section>
             <Footer />
         </>
     );
