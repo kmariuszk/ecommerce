@@ -49,7 +49,10 @@ function Index({ products }) {
         </h3>
         <div className='homepage--best-sellers--product-container'>
           {
-            products.map((product) => (
+            products.sort(
+              (p1, p2) =>
+                (p1.price < p2.price) ? 1 : (p1.price > p2.price) ? -1 : 0
+            ).slice(0, 4).map((product) => (
               <ProductCard
                 key={product._id}
                 id={product._id}
@@ -63,7 +66,7 @@ function Index({ products }) {
       </section>
 
       <section className='homepage--categories'>
-          {/* TODO */}
+        {/* TODO */}
       </section>
     </>
   )

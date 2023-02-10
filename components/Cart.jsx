@@ -3,8 +3,13 @@ import Link from 'next/Link';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping, AiOutlineShop } from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
 import toast from 'react-hot-toast';
+import Image from 'next/image';
 
 import { useStateContext } from '../context/StateContext';
+
+const myLoader = ({ src, width, quality }) => {
+  return `${src}?w=${width}&q=${quality || 75}`
+}
 
 /**
  * Cart component; responsible for logic and display of the cart in the application.
@@ -56,10 +61,14 @@ const Cart = () => {
         <div className="product-container">
           {cartItems.length > 0 && cartItems.map((item) => (
             <div className="product" key={item._id}>
-              {/* <img
-                src={urlFor(item?.image[0])}
+              <Image
+                loader={myLoader}
+                src={item.imagesLinks[0]}
                 className="cart-product-image"
-              /> */}
+                alt='product'
+                width={180}
+                height={150}
+              />
               <div className="item-desc">
                 <div className="flex top">
                   <h5>{item.name}</h5>
@@ -114,7 +123,7 @@ const Cart = () => {
             </div>
           </div>
         )}
-        
+
       </div>
     </div>
   )
