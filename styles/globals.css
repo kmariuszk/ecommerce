@@ -10,8 +10,8 @@ body {
 }
 
 .layout--content-container {
-    margin-top: 90px;
-    min-height: calc(100vh - 294.4px - 90px);
+    margin-top: 130.8px;
+    min-height: calc(100vh - 294.4px - 130.8px);
 }
 
 /* HEADER STYLING */
@@ -125,8 +125,8 @@ body {
 .homepage--hero-text-container {
     max-height: 300px;
     position: absolute;
-    top: 36%;
-    left: 75%;
+    top: 28%;
+    left: 73%;
 }
 
 .homepage--hero-title {
@@ -331,7 +331,7 @@ body {
 .product-detail--container {
     display: flex;
     flex-direction: row;
-    padding: 70px 0px 150px 0px;
+    padding: 40px 0px 150px 0px;
     justify-content: center;
     gap: 20px;
 }
@@ -617,4 +617,45 @@ body {
 
 .btn:hover {
     transform: scale(1.1, 1.1);
+}
+
+/* ABOUT PAGE STYLING */
+.about {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    padding-top: 5px;
+    margin-bottom: 70px;
+    margin-left: 20%;
+    margin-right: 20%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.about--introduction h1 {
+    color:#2d83ca;
+    font-size: 70px;
+    text-align: center;
+}
+
+.about--introduction p {
+    margin-top: 10px;
+}
+
+.about--laptops h2 {
+    color:#2d83ca;
+    text-align: center;
+}
+
+.about--laptops p {
+    margin-top: 10px;
+}
+
+.about--accessories h2 {
+    color:#2d83ca;
+    text-align: center;
+}
+
+.about--accessories p {
+    margin-top: 10px;
 }
