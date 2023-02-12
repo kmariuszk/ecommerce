@@ -5,6 +5,7 @@ import headphones from '../public/headphones.png'
 import keyboard from '../public/keyboard.png'
 import ProductCard from '../components/ProductCard'
 import fetch from 'isomorphic-unfetch';
+import Link from 'next/Link';
 
 function Index({ products }) {
   return (
@@ -18,9 +19,9 @@ function Index({ products }) {
           <h3 className='homepage--hero-tagline'>
             Powerful Performance, Portability and Style
           </h3>
-          <button className='homepage--action-button'>
+          <Link className='homepage--action-button' href='/categories/laptop'>
             Explore Laptops
-          </button>
+          </Link>
         </div>
       </section>
 

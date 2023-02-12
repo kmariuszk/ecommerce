@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { AiFillStar, AiOutlineStar, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import { useStateContext } from '../../../context/StateContext';
+import Link from 'next/Link';
 
 const myLoader = ({ src, width, quality }) => {
     return `${src}?w=${width}&q=${quality || 75}`
@@ -52,14 +53,6 @@ function Product({ product }) {
                     <h1>
                         {product.title}
                     </h1>
-                    <div className='product-detail--categories'>
-                        {/* <div>{product.categories}</div> */}
-                        {
-                            product.categories.map(category => (
-                                <div key={category}>{category}</div>
-                            ))
-                        }
-                    </div>
                     <div className="product-detail--reviews">
                         <div>
                             <AiFillStar />
@@ -122,6 +115,16 @@ function Product({ product }) {
                             Buy now
                         </button>
                     </div>
+                    <div className='product-detail--categories'>
+                        <p>Categories: </p>
+                        {
+                            product.categories.map(category => (
+                                <Link key={category} href={`/categories/${category.toLowerCase()}`} className='product-detail--category'>
+                                    {category}
+                                </Link>
+                            ))
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -131,10 +134,22 @@ function Product({ product }) {
 Product.getInitialProps = async ({ query: { id } }) => {
     const productRes = await fetch(`http://localhost:3000/api/products/${id}`);
     const { data } = await productRes.json();
+    const product = data;
 
-    
+    const categoryNames = await Promise.all(
+        product.categories.map(async (categoryId) => {
+            const categoryRes = await fetch(
+                `http://localhost:3000/api/categories/${categoryId}`
+            );
+            const { data } = await categoryRes.json();
+            const name = data;
+            return name;
+        })
+    );
 
-    return { product: data };
+    product.categories = categoryNames;
+
+    return { product };
 };
 
 export default Product

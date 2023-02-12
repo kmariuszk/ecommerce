@@ -44,7 +44,7 @@ async function id(req, res) {
                 res.status(400).json({ success: false });
             }
             break;
-        // Delete a Category of the given category.
+        // Delete a category of the given id.
         case 'DELETE':
             try {
                 const deletedCategory = await Category.deleteOne({ _category: category });
