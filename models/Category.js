@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const CategorySchema = new mongoose.Schema({
-    description: {
+    name: {
         type: String,
-        required: [true, 'Please add a title!'],
+        required: true,
         unique: true,
     },
     description: {
@@ -12,4 +12,4 @@ const CategorySchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.models.Product || mongoose.model('Product', ProductSchema);
+module.exports = mongoose.models.Category || mongoose.model('Category', CategorySchema);

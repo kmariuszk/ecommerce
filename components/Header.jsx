@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/link'
+import Link from 'next/Link';
 import { AiOutlineSearch, AiOutlineShopping } from 'react-icons/ai';
 import { useState, useEffect, useRef } from 'react';
 import Cart from './Cart';

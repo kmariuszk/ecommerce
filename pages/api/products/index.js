@@ -27,6 +27,20 @@ async function index(req, res) {
                 res.status(400).json({ success: false });
             }
             break;
+        // Delete all products.
+        case 'DELETE':
+            try {
+                const deletedProducts = await Product.deleteMany();
+
+                if (!deletedProducts) {
+                    return res.status(400).json({ success: false });
+                }
+
+                res.status(200).json({ success: true, data: {} });
+            } catch (error) {
+                res.status(400).json({ success: false });
+            }
+            break;
         default:
             res.status(400).json({ success: false });
             break;

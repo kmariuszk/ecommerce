@@ -1,3 +1,4 @@
+import Category from './Category';
 const mongoose = require('mongoose');
 
 const ProductSchema = new mongoose.Schema({
@@ -10,10 +11,20 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    categories: {
-        type: [String],
+    categories: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
         required: true,
-    },
+        validate: {
+            isAsync: true,
+            validator: async function (value) {
+                console.log("Validating")
+                const category = await Category.findById(value);
+                return category;
+            },
+            message: 'Invalid Category ObjectId'
+        }
+    }],
     imagesLinks: {
         type: [String],
         required: true,

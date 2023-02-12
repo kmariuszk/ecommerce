@@ -47,9 +47,9 @@ async function id(req, res) {
         // Delete a product of the given id.
         case 'DELETE':
             try {
-                const deletedproduct = await Product.deleteOne({ _id: id });
+                const deletedProduct = await Product.deleteOne({ _id: id });
 
-                if (!deletedproduct) {
+                if (!deletedProduct) {
                     return res.status(400).json({ success: false });
                 }
 

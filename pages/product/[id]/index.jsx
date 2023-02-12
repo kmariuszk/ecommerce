@@ -52,6 +52,14 @@ function Product({ product }) {
                     <h1>
                         {product.title}
                     </h1>
+                    <div className='product-detail--categories'>
+                        {/* <div>{product.categories}</div> */}
+                        {
+                            product.categories.map(category => (
+                                <div key={category}>{category}</div>
+                            ))
+                        }
+                    </div>
                     <div className="product-detail--reviews">
                         <div>
                             <AiFillStar />
@@ -121,8 +129,10 @@ function Product({ product }) {
 }
 
 Product.getInitialProps = async ({ query: { id } }) => {
-    const res = await fetch(`http://localhost:3000/api/products/${id}`);
-    const { data } = await res.json();
+    const productRes = await fetch(`http://localhost:3000/api/products/${id}`);
+    const { data } = await productRes.json();
+
+    
 
     return { product: data };
 };

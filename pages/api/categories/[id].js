@@ -6,23 +6,23 @@ dbConnect();
 /**
  * Defines APIs needed to view, edit and delete existing Category.
  */
-async function category(req, res) {
+async function id(req, res) {
     const {
-        query: { category },
+        query: { id },
         method,
     } = req;
 
     switch (method) {
-        // Get a Category of the given category.
+        // Get a name of the given category.
         case 'GET':
             try {
-                const Category = await Category.findByCategory(category);
+                const category = await Category.findById(id);
 
-                if (!Category) {
+                if (!category) {
                     return res.status(400).json({ success: false });
                 }
 
-                res.status(200).json({ success: true, data: Category });
+                res.status(200).json({ success: true, data: category.name });
             } catch (error) {
                 res.status(400).json({ success: false });
             }
@@ -30,16 +30,16 @@ async function category(req, res) {
         // Update a name of the given category.
         case 'PUT':
             try {
-                const Category = await Category.findByCategoryAndUpdate(category, req.body, {
+                const category = await Category.findByIdAndUpdate(id, req.body, {
                     new: true,
                     runValcdators: true,
                 });
 
-                if (!Category) {
+                if (!category) {
                     return res.status(400).json({ success: false });
                 }
 
-                res.status(200).json({ success: true, data: Category });
+                res.status(200).json({ success: true, data: category });
             } catch (error) {
                 res.status(400).json({ success: false });
             }
@@ -64,4 +64,4 @@ async function category(req, res) {
     }
 };
 
-export default category;
+export default id;

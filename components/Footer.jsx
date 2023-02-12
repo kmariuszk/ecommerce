@@ -1,7 +1,7 @@
 import React from 'react'
 import { AiOutlineInstagram, AiOutlineTwitter, AiOutlineFacebook } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
+import Link from 'next/Link';
 
 const navLinks = [
   ["Home", "/"],
