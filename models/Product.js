@@ -11,7 +11,11 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    categories: [{
+    brand: {
+        type: String,
+        required: true,
+    },
+    category: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
         required: true,
@@ -24,7 +28,7 @@ const ProductSchema = new mongoose.Schema({
             },
             message: 'Invalid Category ObjectId'
         }
-    }],
+    },
     imagesLinks: {
         type: [String],
         required: true,

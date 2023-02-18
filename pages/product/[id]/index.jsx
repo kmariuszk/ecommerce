@@ -11,6 +11,7 @@ const myLoader = ({ src, width, quality }) => {
 }
 
 function Product({ product }) {
+    console.log(product.category);
     const [index, setIndex] = useState(0);
 
     // Fetching global variables from the StateContext.js.
@@ -116,14 +117,10 @@ function Product({ product }) {
                         </button>
                     </div>
                     <div className='product-detail--categories'>
-                        <p>Categories: </p>
-                        {
-                            product.categories.map(category => (
-                                <Link key={category} href={`/categories/${category.toLowerCase()}`} className='product-detail--category'>
-                                    {category}
-                                </Link>
-                            ))
-                        }
+                        <p>Category: </p>
+                        <Link key={product.category} href={`/categories/${product.category}`} className='product-detail--category'>
+                            {product.category}
+                        </Link>
                     </div>
                 </div>
             </div>
@@ -133,21 +130,15 @@ function Product({ product }) {
 
 Product.getInitialProps = async ({ query: { id } }) => {
     const productRes = await fetch(`http://localhost:3000/api/products/${id}`);
-    const { data } = await productRes.json();
-    const product = data;
+    const { data: product } = await productRes.json();
 
-    const categoryNames = await Promise.all(
-        product.categories.map(async (categoryId) => {
-            const categoryRes = await fetch(
-                `http://localhost:3000/api/categories/${categoryId}`
-            );
-            const { data } = await categoryRes.json();
-            const name = data;
-            return name;
-        })
-    );
+    console.log("Products category: ");
+    console.log(product.category);
+    const categoryRes = await fetch(`http://localhost:3000/api/categories/${product.category}`);
+    const { data: categoryName }  = await categoryRes.json();
 
-    product.categories = categoryNames;
+    console.log(categoryName);
+    product.category = categoryName;
 
     return { product };
 };

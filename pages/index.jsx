@@ -4,10 +4,11 @@ import hero from '../public/hero.png'
 import headphones from '../public/headphones.png'
 import keyboard from '../public/keyboard.png'
 import ProductCard from '../components/ProductCard'
+import CategoryCard from '../components/CategoryCard'
 import fetch from 'isomorphic-unfetch';
 import Link from 'next/Link';
 
-function Index({ products }) {
+function Index({ products, categories }) {
   return (
     <>
       <section className='homepage--hero-container'>
@@ -42,10 +43,10 @@ function Index({ products }) {
       </section>
 
       <section className='homepage--best-sellers'>
-        <h1 className='homepage--best-sellers--title'>
+        <h1 className='homepage--section-title'>
           Top Selling
         </h1>
-        <h3 className='homepage--best-sellers--description'>
+        <h3 className='homepage--section-description'>
           This week&apos;s most popular products
         </h3>
         <div className='homepage--best-sellers--product-container'>
@@ -67,17 +68,37 @@ function Index({ products }) {
       </section>
 
       <section className='homepage--categories'>
-        {/* TODO */}
+        <h1 className='homepage--section-title'>
+          Categories
+        </h1>
+        <h3 className='homepage--section-description'>
+          Find the perfect gaming gear for your play style with our selection of laptops and accessories.
+        </h3>
+        <div className='homepage--categories--categories-container'>
+          {
+            categories.map((category) => (
+              <CategoryCard
+                key={category._id}
+                category={category.name}
+                title={category.name}
+                description={category.description}
+              />
+            ))
+          }
+        </div>
       </section>
     </>
   )
 }
 
 Index.getInitialProps = async () => {
-  const res = await fetch('http://localhost:3000/api/products');
-  const { data } = await res.json();
+  const productsRes = await fetch('http://localhost:3000/api/products');
+  const { data: products } = await productsRes.json();
 
-  return { products: data };
+  const categoriesRes = await fetch('http://localhost:3000/api/categories');
+  const { data: categories } = await categoriesRes.json();
+
+  return { products, categories };
 };
 
 export default Index

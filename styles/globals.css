@@ -194,14 +194,14 @@ body {
     color: white;
 }
 
-.homepage--best-sellers--title {
+.homepage--section-title {
     font-size: 40px;
     text-align: center;
     margin-top: 30px;
     padding: 10px;
 }
 
-.homepage--best-sellers--description {
+.homepage--section-description {
     font-size: 20px;
     text-align: center;
 }
@@ -209,7 +209,7 @@ body {
 .homepage--best-sellers--product-container {
     display: flex;
     justify-content: space-between;
-    margin: 20px 50px;
+    margin: 20px 100px;
 }
 
 .productCard {
@@ -236,6 +236,48 @@ body {
     color: black;
     font-family: 'Montserrat';
     font-size: 20px;
+}
+
+/* categories section */
+.homepage--categories {
+    font-family: 'Roboto';
+    color: white;
+}
+
+.homepage--categories--categories-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 100px;
+}
+
+.categoryCard {
+    width: 400px;
+    /* height: 600px; */
+}
+
+.categoryCard--card {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.categoryCard--title {
+    background-color: #ebebeb;
+    border-radius: 5px;
+    font-family: 'Montserrat';
+    font-size: 30px;
+    padding: 10px;
+    height: 100px;
+}
+
+.categoryCard--description {
+    background-color: #ebebeb;
+    font-family: 'Montserrat';
+    border-radius: 5px;
+    padding: 10px;
+    height: 400px;
 }
 
 /* FOOTER STYLING */
@@ -681,4 +723,30 @@ body {
 
 .about--accessories p {
     margin-top: 10px;
+}
+
+/* PRODUCTS WEBPAGE */
+
+.products {
+    padding: 50px 100px;
+}
+
+.products--sort-by {
+    background-color: red;
+}
+
+.products--container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 20px;
+}
+
+.products--filters {
+    background-color: blue;
+}
+
+.products--products-list {
+    background-color: aqua;
 }
