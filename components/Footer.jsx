@@ -2,6 +2,7 @@ import React from 'react'
 import { AiOutlineInstagram, AiOutlineTwitter, AiOutlineFacebook } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
 import Link from 'next/Link';
+import { toast } from 'react-hot-toast';
 
 const navLinks = [
   ["Home", "/"],
@@ -10,11 +11,25 @@ const navLinks = [
 ];
 
 function Footer() {
-
-
   const actionButtons = navLinks.map((item, index) => (
     <Link className='Footer-element' key={index} href={item[1]}>{item[0]}</Link>
   ))
+
+  const [newsletterEmail, setNewsletterEmail] = useState("");
+
+  function handleNewsletterInputChange(event) {
+    setNewsletterEmail(event.target.value);
+  }
+
+  function handleEmailSubmission() {
+    const mailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
+    if (mailRegex.test(newsletterEmail)) {
+      setNewsletterEmail("");
+      toast.success("Email has been saved!");
+    } else {
+      toast.error("Incorrect email address!");
+    }
+  }
 
   return (
     <section className='Footer'>
@@ -22,8 +37,8 @@ function Footer() {
         <div className='Footer--newsletter'>
           <h3 className='Footer--newsletter-title'>Join the newsletter!</h3>
           <p className='Footer--newsletter-description'>Subscribe to get information about new products.</p>
-          <input className='Footer--newsletter-input' placeholder='Your email address'/>
-          <button className='Footer--newsletter-button'>SUBSCRIBE</button>
+          <input className='Footer--newsletter-input' placeholder='Your email address' value={newsletterEmail} onChange={handleNewsletterInputChange} />
+          <button className='Footer--newsletter-button' onClick={handleEmailSubmission}>SUBSCRIBE</button>
         </div>
 
         <div className='Footer--vertical-line' />
