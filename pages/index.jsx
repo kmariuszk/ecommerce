@@ -20,7 +20,7 @@ function Index({ products, categories }) {
           <h3 className='homepage--hero-tagline'>
             Powerful Performance, Portability and Style
           </h3>
-          <Link className='homepage--action-button' href='/categories/laptop'>
+          <Link className='homepage--action-button' href='/products?category=Laptop'>
             Explore Laptops
           </Link>
         </div>

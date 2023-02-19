@@ -9,7 +9,7 @@ const myLoader = ({ src, width, quality }) => {
 function ProductCard({ id, title, image, price }) {
     return (
         <div className='productCard'>
-            <Link className='productCard--image' href={`product/${id}`}>
+            <Link className='productCard--container' href={`product/${id}`}>
                 <Image
                     className='productCard--image'
                     loader={myLoader}

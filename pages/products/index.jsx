@@ -1,14 +1,15 @@
 import React from 'react';
 import ProductCard from '../../components/ProductCard';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useRouter } from "next/router";
 
 const differentSorts = ['Price - high to low', 'Price - low to high'];
 
 function Products({ products, categories }) {
-  const uniqueBrands = findUniqueBrands(products);
+  const uniqueBrands = useMemo(() => findUniqueBrands(products), [products]);
   const maxPrice = findMaxPrice(products);
-  const initialCategory = findInitialCategory(useRouter().query);
+  const router = useRouter();
+  const initialCategory = findInitialCategory(router, categories);
 
   const [filters, setFilters] = useState({
     sortBy: differentSorts[0],
@@ -21,9 +22,7 @@ function Products({ products, categories }) {
   })
 
   // Initially display all of the products
-  const [toDisplayProducts, setToDisplayProducts] = useState(
-    products.map((product) => ({ ...product, display: true }))
-  );
+  const [toDisplayProducts, setToDisplayProducts] = useState({ products: products, quantity: products.length });
 
   function handleSortChange(event) {
     setFilters((prevFilters) => ({
@@ -57,23 +56,29 @@ function Products({ products, categories }) {
   }
 
   useEffect(() => {
-    setToDisplayProducts(() => products.map((product) => {
-      if (isSuitableProduct(product, filters)) {
-        return ({
-          ...product,
-          display: true,
-        })
-      } else {
-        return ({
-          ...product,
-          display: false,
-        })
-      }
-    }).sort((p1, p2) => {
-      if (filters.sortBy === 'Price - low to high') return p1.price > p2.price;
-      else return p1.price < p2.price;
-    }));
+    setToDisplayProducts(() => {
+      let counter = 0;
+      return {
+        products: products.map((product) => {
+        if (isSuitableProduct(product, filters)) {
+          counter += 1;
+          return ({
+            ...product,
+            display: true,
+          })
+        } else {
+          return ({
+            ...product,
+            display: false,
+          })
+        }
+      }).sort((p1, p2) => {
+        if (filters.sortBy === 'Price - low to high') return p1.price > p2.price;
+        else return p1.price < p2.price;
+      }), quantity: counter}
+    });
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
   function isSuitableProduct(product, filters) {
@@ -105,7 +110,7 @@ function Products({ products, categories }) {
         <select onChange={handleSortChange}>
           {
             differentSorts.map((option, index) => (
-              <option key={index}>
+              <option key={index} value={option}>
                 {option}
               </option>
             ))
@@ -116,21 +121,22 @@ function Products({ products, categories }) {
         <div className='products--filters'>
           <form>
             <div className='products--price'>
+              <h4>Price</h4>
               <input
                 type="range"
-                min="0"
+                min={0}
                 max={maxPrice}
                 value={filters.price}
                 className="products--price-bar"
                 id="myRange"
                 onChange={hanglePriceChange}
               />
+              <p>Prices up to ${filters.price}</p>
             </div>
 
             <div className='products--categories'>
-              Products-categories
+              <h4>Category</h4>
               <select
-                type="select"
                 value={filters.category}
                 onChange={handleCategoryChange}
               >
@@ -139,7 +145,10 @@ function Products({ products, categories }) {
                 </option>
                 {
                   categories.map((category) => (
-                    <option key={category._id} value={category._id}>
+                    <option
+                      key={category.name}
+                      product={category.name}
+                    >
                       {category.name}
                     </option>
                   ))
@@ -148,32 +157,31 @@ function Products({ products, categories }) {
             </div>
 
             <div className='products--brand'>
-              <ul>
-                Products-brands
-                {filters.brands.map((brand, index) => {
-                  return (
-                    <li key={index}>
-                      <div>
-                        <input
-                          type="checkbox"
-                          id={index}
-                          name={brand.name}
-                          value={brand.name}
-                          checked={brand.display}
-                          onChange={() => handleBrandChange(index)}
-                        />
-                        <label htmlFor={index}>{brand.name}</label>
-                      </div>
-                    </li>
-                  )
-                })}
-              </ul>
+              <h4>Brands</h4>
+
+              {filters.brands.map((brand, index) => {
+                return (
+                  <div key={index}>
+                    <input
+                      type="checkbox"
+                      id={index}
+                      name={brand.name}
+                      product={brand.name}
+                      checked={brand.display}
+                      onChange={() => handleBrandChange(index)}
+                    />
+                    <label htmlFor={index}>{brand.name}</label>
+                  </div>
+                )
+              })}
+
             </div>
           </form>
         </div>
         <div className='products--products-list'>
           {
-            toDisplayProducts.filter((product) => product.display).map((product) => (
+            toDisplayProducts.quantity !== 0 ?
+            toDisplayProducts.products.filter((product) => product.display).map((product) => (
               <ProductCard
                 key={product._id}
                 id={product._id}
@@ -181,7 +189,9 @@ function Products({ products, categories }) {
                 image={product.imagesLinks[0]}
                 price={product.price}
               />
-            ))
+            )) : (
+              <h1>Unfortunately, no products...</h1>
+            )
           }
         </div>
       </div>
@@ -191,10 +201,16 @@ function Products({ products, categories }) {
 
 Products.getInitialProps = async () => {
   const productsRes = await fetch('http://localhost:3000/api/products');
-  const { data: products } = await productsRes.json();
+  let { data: products } = await productsRes.json();
 
   const categoriesRes = await fetch('http://localhost:3000/api/categories');
   const { data: categories } = await categoriesRes.json();
+
+  products = products.map((product) => ({
+    ...product,
+    display: true,
+    category: categories.find((category) => category._id === product.category).name
+  }))
 
   return { products, categories };
 };
@@ -204,17 +220,22 @@ function findUniqueBrands(products) {
 }
 
 function findMaxPrice(products) {
-  return products.reduce((acc, value) => {
-    return (acc = acc.price > value.price ? acc.price : value.price);
-  });
+  let maxPrice = 0;
+
+  products.forEach((product) => maxPrice = Math.max(maxPrice, product.price))
+
+  return maxPrice;
 }
 
-function findInitialCategory(query) {
-  if (query.category) {
-    return query.category;
-  } else {
-    return 'All'
+function findInitialCategory(router, categories) {
+  let initialCategory = router.query.category;
+  if (
+    !initialCategory ||
+    categories.find((category) => category.name === initialCategory) === undefined
+  ) {
+    initialCategory = "All";
   }
+  return initialCategory;
 }
 
 export default Products

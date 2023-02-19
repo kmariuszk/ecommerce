@@ -118,7 +118,7 @@ function Product({ product }) {
                     </div>
                     <div className='product-detail--categories'>
                         <p>Category: </p>
-                        <Link key={product.category} href={`/categories/${product.category}`} className='product-detail--category'>
+                        <Link key={product.category} href={`/products?category=${product.category}`} className='product-detail--category'>
                             {product.category}
                         </Link>
                     </div>
@@ -132,8 +132,6 @@ Product.getInitialProps = async ({ query: { id } }) => {
     const productRes = await fetch(`http://localhost:3000/api/products/${id}`);
     const { data: product } = await productRes.json();
 
-    console.log("Products category: ");
-    console.log(product.category);
     const categoryRes = await fetch(`http://localhost:3000/api/categories/${product.category}`);
     const { data: categoryName }  = await categoryRes.json();
 
