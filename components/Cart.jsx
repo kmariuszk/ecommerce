@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import Image from 'next/image';
 
 import { useStateContext } from '../context/StateContext';
+import getStripe from '../lib/getStripe';
 
 const myLoader = ({ src, width, quality }) => {
   return `${src}?w=${width}&q=${quality || 75}`
@@ -17,6 +18,26 @@ const myLoader = ({ src, width, quality }) => {
 const Cart = () => {
   const cartRef = useRef();
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove } = useStateContext();
+
+  const handleCheckout = async () => {
+    const stripe = await getStripe();
+
+    const response = await fetch('/api/stripe', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({cartItems}),
+    });
+
+    if (response.statusCode === 500) return;
+
+    const data = await response.json();
+
+    toast.loading('Redirecting...');
+
+    stripe.redirectToCheckout({ sessionId: data.id });
+  }
 
   return (
     <div className="cart-wrapper" ref={cartRef}>
@@ -115,10 +136,10 @@ const Cart = () => {
               <button
                 type="button"
                 className="btn"
-              // TODO: Add payment method
-              // onClick=""
+                // TODO: Add payment method
+                onClick={handleCheckout}
               >
-                Pay
+                CHECKOUT
               </button>
             </div>
           </div>

@@ -135,7 +135,6 @@ Product.getInitialProps = async ({ query: { id } }) => {
     const categoryRes = await fetch(`http://localhost:3000/api/categories/${product.category}`);
     const { data: categoryName }  = await categoryRes.json();
 
-    console.log(categoryName);
     product.category = categoryName;
 
     return { product };
