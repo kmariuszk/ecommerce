@@ -4,6 +4,7 @@ import { AiOutlineSearch, AiOutlineShopping } from 'react-icons/ai';
 import { useState, useEffect, useRef } from 'react';
 import Cart from './Cart';
 import { useStateContext } from '../context/StateContext';
+import { useRouter } from 'next/router';
 
 const navLinks = [
   ["Home", "/"],
@@ -16,26 +17,28 @@ const navLinks = [
 // });
 
 function Header() {
+  const { showCart, setShowCart, totalQuantities, searchPhrase, setSearchPhrase } = useStateContext();
+  const router = useRouter();
+
   const [isShrunk, setShrunk] = useState(false);
   const [isSearching, setSearching] = useState(false);
-  const [query, setQuery] = useState('');
   const inputRef = useRef(null);
 
-  const { showCart, setShowCart, totalQuantities } = useStateContext();
-
   function handleSearchClick() {
-    setSearching(prevSearching => !prevSearching);
+    if (searchPhrase != "") {
+      router.push('/products');
+    } else {
+      setSearching(prevSearching => !prevSearching);
+    }
   }
 
   function handleQueryChange(event) {
-    setQuery(event.target.value);
+    setSearchPhrase(event.target.value);
   }
 
   function handleKeyDown(event) {
     if (event.key === 'Enter') {
-      // 👇 Get input value
-      console.log(query);
-      setQuery('');
+      router.push('/products');
     }
   };
 
@@ -93,7 +96,7 @@ function Header() {
           placeholder='What are you looking for?'
           onChange={handleQueryChange}
           onKeyDown={handleKeyDown}
-          value={query}
+          value={searchPhrase}
         />
 
         <button className='Header--search-button' onClick={handleSearchClick}>

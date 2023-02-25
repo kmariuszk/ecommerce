@@ -22,6 +22,9 @@ export const StateContext = ({ children }) => {
     // Contains an ammount of added products to the cart.
     const [qty, setQty] = useState(1);
 
+    // Containg the search phrase written by the user.
+    const [searchPhrase, setSearchPhrase] = useState("");
+
     let foundProduct;
     let index;
 
@@ -123,10 +126,12 @@ export const StateContext = ({ children }) => {
                 incQty,
                 decQty,
                 onAdd,
+                searchPhrase,
                 setShowCart,
                 setCartItems,
                 setTotalPrice,
                 setTotalQuantities,
+                setSearchPhrase,
                 toggleCartItemQuantity,
                 onRemove
             }}
