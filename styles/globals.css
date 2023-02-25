@@ -782,3 +782,25 @@ body {
     gap: 20px;
     grid-template-columns: auto auto auto auto;
 }
+
+/* SUCCESS PAGE STYLING */
+
+.success--wrapper {
+    padding: 210px;
+    display: flex;
+    justify-content: center;
+}
+
+.success {
+    padding: 20px;
+    color: white;
+    background-color: #30302d;
+    border-radius: 10px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+}
+
+.success--icon {
+    color:rgb(49, 168, 49);
+    font-size: 48px;
+}

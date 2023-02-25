@@ -11,11 +11,14 @@ const myLoader = ({ src, width, quality }) => {
 }
 
 function Product({ product }) {
-    console.log(product.category);
     const [index, setIndex] = useState(0);
+    const { decQty, incQty, qty, onAdd, setShowCart } = useStateContext();
 
-    // Fetching global variables from the StateContext.js.
-    const { decQty, incQty, qty, onAdd } = useStateContext();
+    function handleBuyNow() {
+        onAdd(product, qty);
+
+        setShowCart(true);
+    }
 
     return (
         <div className='product-detail'>
@@ -110,8 +113,7 @@ function Product({ product }) {
                         <button
                             type="button"
                             className="buy-now"
-                        // TODO: add functionality to buy the product.
-                        // onClick=""
+                            onClick={handleBuyNow}
                         >
                             Buy now
                         </button>
@@ -133,7 +135,7 @@ Product.getInitialProps = async ({ query: { id } }) => {
     const { data: product } = await productRes.json();
 
     const categoryRes = await fetch(`http://localhost:3000/api/categories/${product.category}`);
-    const { data: categoryName }  = await categoryRes.json();
+    const { data: categoryName } = await categoryRes.json();
 
     product.category = categoryName;
 
