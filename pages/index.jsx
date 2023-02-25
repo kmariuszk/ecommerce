@@ -80,8 +80,7 @@ function Index({ products, categories }) {
               <CategoryCard
                 key={category._id}
                 category={category.name}
-                title={category.name}
-                description={category.description}
+                image={category.imageLink}
               />
             ))
           }

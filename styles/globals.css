@@ -146,8 +146,6 @@ body {
 .homepage--action-button {
     margin-top: 10px;
     text-decoration: none;
-    /* margin-left: 50%; */
-    /* transform: translateX(-50%); */
     background-color: white;
     border: none;
     padding: 10px 15px;
@@ -204,6 +202,8 @@ body {
 .homepage--section-description {
     font-size: 20px;
     text-align: center;
+    display: flex;
+    justify-content: center;
 }
 
 .homepage--best-sellers--product-container {
@@ -251,37 +251,29 @@ body {
 .homepage--categories--categories-container {
     display: flex;
     justify-content: space-between;
+    gap: 50px;
     margin: 20px 100px;
 }
 
 .categoryCard {
-    width: 400px;
-    /* height: 600px; */
+    overflow: hidden;
+    border-radius: 5px;
 }
 
-.categoryCard--card {
+ .categoryCard--card {
     text-decoration: none;
     color: black;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    background-color: white;
 }
 
 .categoryCard--title {
     background-color: #ebebeb;
-    border-radius: 5px;
     font-family: 'Montserrat';
     font-size: 30px;
     padding: 10px;
-    height: 100px;
-}
-
-.categoryCard--description {
-    background-color: #ebebeb;
-    font-family: 'Montserrat';
-    border-radius: 5px;
-    padding: 10px;
-    height: 400px;
+    font-weight: bolder;
 }
 
 /* FOOTER STYLING */

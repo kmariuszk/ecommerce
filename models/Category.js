@@ -6,7 +6,7 @@ const CategorySchema = new mongoose.Schema({
         required: true,
         unique: true,
     },
-    description: {
+    imageLink: {
         type: String,
         required: true,
     }
