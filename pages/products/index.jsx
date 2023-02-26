@@ -3,6 +3,7 @@ import ProductCard from '../../components/ProductCard';
 import { useState, useEffect, useMemo } from 'react';
 import { useRouter } from "next/router";
 import { useStateContext } from '../../context/StateContext';
+import { TbMoodEmpty } from "react-icons/tb";
 
 const differentSorts = ['Price - high to low', 'Price - low to high'];
 
@@ -89,133 +90,136 @@ function Products({ products, categories }) {
   useEffect(() => {
     setFilters((prevFilters) => ({
       ...prevFilters,
-      query:searchPhrase, 
+      query: searchPhrase,
     }))
-}, [searchPhrase])
+  }, [searchPhrase])
 
-function isSuitableProduct(product, filters) {
-  // Price filter
-  if (product.price > filters.price) return false;
+  function isSuitableProduct(product, filters) {
+    // Price filter
+    if (product.price > filters.price) return false;
 
-  // Category filter
-  if (filters.category !== 'All') {
-    if (product.category !== filters.category) return false;
+    // Category filter
+    if (filters.category !== 'All') {
+      if (product.category !== filters.category) return false;
+    }
+
+    // Brands filter
+    if (isAnyBrandChosen(filters.brands)) {
+      if (filters.brands.find((brand) => brand.name === product.brand).display === false) return false;
+    }
+
+    // Query search filter
+    if (filters.query != "") {
+      if (!product.title.toLowerCase().includes(filters.query.toLowerCase())
+        && !product.description.toLowerCase().includes(filters.query.toLowerCase())
+      ) return false;
+    }
+
+    return true;
   }
 
-  // Brands filter
-  if (isAnyBrandChosen(filters.brands)) {
-    if (filters.brands.find((brand) => brand.name === product.brand).display === false) return false;
+  function isAnyBrandChosen(brands) {
+    if (brands.find((brand) => brand.display) === undefined) return false;
+    return true;
   }
 
-  // Query search filter
-  if (filters.query != "") {
-    if (!product.title.toLowerCase().includes(filters.query.toLowerCase())
-      && !product.description.toLowerCase().includes(filters.query.toLowerCase())
-    ) return false;
-  }
-
-  return true;
-}
-
-function isAnyBrandChosen(brands) {
-  if (brands.find((brand) => brand.display) === undefined) return false;
-  return true;
-}
-
-return (
-  <div className='products'>
-    <div className='products--sort-by'>
-      <p>Sort by: </p>
-      <select onChange={handleSortChange}>
-        {
-          differentSorts.map((option, index) => (
-            <option key={index} value={option}>
-              {option}
-            </option>
-          ))
-        }
-      </select>
-    </div>
-    <div className='products--container'>
-      <div className='products--filters'>
-        <form>
-          <div className='products--price'>
-            <h4>Price</h4>
-            <input
-              type="range"
-              min={0}
-              max={maxPrice}
-              value={filters.price}
-              className="products--price-bar"
-              id="myRange"
-              onChange={hanglePriceChange}
-            />
-            <p>Prices up to ${filters.price}</p>
-          </div>
-
-          <div className='products--categories'>
-            <h4>Category</h4>
-            <select
-              value={filters.category}
-              onChange={handleCategoryChange}
-            >
-              <option>
-                All
+  return (
+    <div className='products'>
+      <div className='products--sort-by'>
+        <p>Sort by: </p>
+        <select onChange={handleSortChange}>
+          {
+            differentSorts.map((option, index) => (
+              <option key={index} value={option}>
+                {option}
               </option>
-              {
-                categories.map((category) => (
-                  <option
-                    key={category.name}
-                    product={category.name}
-                  >
-                    {category.name}
-                  </option>
-                ))
-              }
-            </select>
-          </div>
+            ))
+          }
+        </select>
+      </div>
+      <div className='products--container'>
+        <div className='products--filters'>
+          <form>
+            <div className='products--price'>
+              <h4>Price</h4>
+              <input
+                type="range"
+                min={0}
+                max={maxPrice}
+                value={filters.price}
+                className="products--price-bar"
+                id="myRange"
+                onChange={hanglePriceChange}
+              />
+              <p>Prices up to ${filters.price}</p>
+            </div>
 
-          <div className='products--brand'>
-            <h4>Brands</h4>
+            <div className='products--categories'>
+              <h4>Category</h4>
+              <select
+                value={filters.category}
+                onChange={handleCategoryChange}
+              >
+                <option>
+                  All
+                </option>
+                {
+                  categories.map((category) => (
+                    <option
+                      key={category.name}
+                      product={category.name}
+                    >
+                      {category.name}
+                    </option>
+                  ))
+                }
+              </select>
+            </div>
 
-            {filters.brands.map((brand, index) => {
-              return (
-                <div key={index}>
-                  <input
-                    type="checkbox"
-                    id={index}
-                    name={brand.name}
-                    product={brand.name}
-                    checked={brand.display}
-                    onChange={() => handleBrandChange(index)}
-                  />
-                  <label htmlFor={index}>{brand.name}</label>
+            <div className='products--brand'>
+              <h4>Brands</h4>
+
+              {filters.brands.map((brand, index) => {
+                return (
+                  <div key={index}>
+                    <input
+                      type="checkbox"
+                      id={index}
+                      name={brand.name}
+                      product={brand.name}
+                      checked={brand.display}
+                      onChange={() => handleBrandChange(index)}
+                    />
+                    <label htmlFor={index}>{brand.name}</label>
+                  </div>
+                )
+              })}
+
+            </div>
+          </form>
+        </div>
+        <div className='products--products-list'>
+          {
+            toDisplayProducts.quantity !== 0 ?
+              toDisplayProducts.products.filter((product) => product.display).map((product) => (
+                <ProductCard
+                  key={product._id}
+                  id={product._id}
+                  title={product.title}
+                  image={product.imagesLinks[0]}
+                  price={product.price}
+                />
+              )) : (
+                <div className='products--empty-list'>
+                  <TbMoodEmpty className='icon'/>
+                  <h1>Sorry, we couldn&apos;t find any products that match your filters. Please try broadening your search criteria.</h1>
                 </div>
               )
-            })}
-
-          </div>
-        </form>
-      </div>
-      <div className='products--products-list'>
-        {
-          toDisplayProducts.quantity !== 0 ?
-            toDisplayProducts.products.filter((product) => product.display).map((product) => (
-              <ProductCard
-                key={product._id}
-                id={product._id}
-                title={product.title}
-                image={product.imagesLinks[0]}
-                price={product.price}
-              />
-            )) : (
-              <h1>Unfortunately, no products...</h1>
-            )
-        }
+          }
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
 }
 
 Products.getInitialProps = async () => {

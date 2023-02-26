@@ -16,7 +16,12 @@ function ProductCard({ id, title, image, price }) {
                     width={300}
                     height={300}
                     alt={title}
-                    src={image}>
+                    src={image}
+                    style={{
+                        objectFit: 'contain',
+                        objectPosition: '50% 50%',
+                    }}
+                >
                 </Image>
                 <p className='productCard--title'>{title}</p>
                 <p className='productCard--price'>${price}</p>

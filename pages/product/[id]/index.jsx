@@ -1,6 +1,5 @@
 import fetch from 'isomorphic-unfetch';
-import { React, useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { React, useState } from 'react';
 import Image from 'next/image';
 import { AiFillStar, AiOutlineStar, AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai'
 import { useStateContext } from '../../../context/StateContext';
@@ -32,6 +31,10 @@ function Product({ product }) {
                             alt={product.title}
                             width={400}
                             height={400}
+                            style={{
+                                objectFit: 'contain',
+                                objectPosition: '50% 50%',
+                            }}
                         />
                     </div>
                     <div className='product-detail--small-images-container'>
@@ -48,6 +51,10 @@ function Product({ product }) {
                                 width={100}
                                 height={100}
                                 loader={myLoader}
+                                style={{
+                                    objectFit: 'contain',
+                                    objectPosition: '50% 50%',
+                                }}
                             />
                         ))}
                     </div>

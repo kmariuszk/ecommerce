@@ -7,7 +7,11 @@ export default function App({ Component, pageProps }) {
   return (
     <StateContext>
       <Layout>
-        <Toaster position="bottom-center"/>
+        <Toaster position="bottom-center" toastOptions={{
+          style: {
+            fontFamily: "Open sans",
+          },
+        }} />
         <Component {...pageProps} />
       </Layout>
     </StateContext>

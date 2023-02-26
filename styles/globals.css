@@ -161,11 +161,8 @@ body {
 /* feature section */
 
 .homepage--features {
-    display: grid;
-    grid-gap: 3px;
-    grid-template-columns: auto auto auto;
-    align-content: center;
-    justify-items: center;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     padding: 0 50px;
@@ -184,10 +181,15 @@ body {
     line-height: 30px;
     font-family: 'Montserrat';
     color: white;
+    max-width: 320px;
 }
 
 /* best sellers section */
 .homepage--best-sellers {
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-family: 'Roboto';
     color: white;
 }
@@ -208,8 +210,10 @@ body {
 
 .homepage--best-sellers--product-container {
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
     margin: 20px 100px;
+    /* max-width: 1350px; */
 }
 
 .productCard {
@@ -244,20 +248,31 @@ body {
 
 /* categories section */
 .homepage--categories {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     font-family: 'Roboto';
     color: white;
+    margin-top: 100px;
 }
 
 .homepage--categories--categories-container {
     display: flex;
-    justify-content: space-between;
-    gap: 50px;
+    flex-wrap: wrap;
+    gap: 3px;
     margin: 20px 100px;
+    max-width: 1350px;
 }
 
 .categoryCard {
+    transition: box-shadow .3s;
     overflow: hidden;
-    border-radius: 5px;
+    /* border-radius: 5px; */
+}
+
+.categoryCard:hover {
+    /* border-style: none; */
+    box-shadow: 0 0 11px rgba(179, 179, 179, 0.743);
 }
 
  .categoryCard--card {
@@ -269,11 +284,12 @@ body {
 }
 
 .categoryCard--title {
-    background-color: #ebebeb;
-    font-family: 'Montserrat';
+    background-color: #ffffff;
+    font-family: 'Open Sans', sans-serif;
     font-size: 30px;
     padding: 10px;
-    font-weight: bolder;
+    font-weight: lighter;
+    text-align: center;
 }
 
 /* FOOTER STYLING */
@@ -284,11 +300,13 @@ body {
     background-color: #313131;
     font-family: 'Roboto';
     box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px, rgba(0, 0, 0, 0.1) 0px 2px 4px 0px, rgba(255, 255, 255, 0.05) 0px 0px 0px 1px;
+    margin-top: 250px;
 }
 
 .Footer--container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
 
@@ -381,6 +399,7 @@ body {
 }
 
 .product-detail--image {
+    background-color: white;
     border-radius: 15px;
 }
 
@@ -392,6 +411,7 @@ body {
 }
 
 .product-detail--small-image {
+    background-color: white;
     border-radius: 8px;
     width: 100px;
     height: 100px;
@@ -568,7 +588,7 @@ body {
 
 .cart-num-items {
     margin-left: 10px;
-    color: #f02d34;
+    color: #2d83ca;
 }
 
 .empty-cart {
@@ -639,7 +659,7 @@ body {
 
 .remove-item {
     font-size: 24px;
-    color: #f02d34;
+    color: #2d83ca;
     cursor: pointer;
     background: transparent;
     border: none;
@@ -669,7 +689,7 @@ body {
     margin-top: 10px;
     margin-top: 40px;
     text-transform: uppercase;
-    background-color: #f02d34;
+    background-color: #2d83ca;
     color: #fff;
     cursor: pointer;
     transform: scale(1, 1);
@@ -683,17 +703,18 @@ body {
 /* ABOUT PAGE STYLING */
 .about {
     color: white;
-    font-family: 'Roboto', sans-serif;
-    padding-top: 5px;
+    font-family: 'Montserrat';
+    padding-top: 95px;
     margin-bottom: 70px;
-    margin-left: 20%;
-    margin-right: 20%;
+    margin-left: 30%;
+    margin-right: 30%;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
 .about--introduction h1 {
+    font-family: 'Open Sans', sans-serif;
     color: #2d83ca;
     font-size: 70px;
     text-align: center;
@@ -741,7 +762,6 @@ body {
     justify-content: right;
     align-items: center;
     gap: 10px;
-    /* background-color: red; */
 }
 
 .products--container {
@@ -764,15 +784,22 @@ body {
     width: 200px;
 }
 
-.products--brand ul {
-
-    list-style: none;
+.products--products-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-.products--products-list {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: auto auto auto auto;
+.products--empty-list {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.products--empty-list .icon {
+    font-size: 50px;
 }
 
 /* SUCCESS PAGE STYLING */

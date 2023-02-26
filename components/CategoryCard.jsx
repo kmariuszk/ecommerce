@@ -9,7 +9,7 @@ const myLoader = ({ src, width, quality }) => {
 function CategoryCard({ category, image }) {
     return (
         <div className='categoryCard'>
-            <Link className='categoryCard--card' href={`products/?category=${category.toLowerCase()}`}>
+            <Link className='categoryCard--card' href={`products/?category=${category}`}>
                 <p className='categoryCard--image'>
                     <Image
                         className='productCard--image'
@@ -18,7 +18,7 @@ function CategoryCard({ category, image }) {
                         height={500}
                         style={{
                             objectFit: 'cover',
-                            objectPosition: '50% 0%',
+                            objectPosition: '50% 50%',
                         }}
                         alt="Category--image"
                         src={image}>
