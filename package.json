@@ -22,5 +22,9 @@
     "react-icons": "^4.7.1",
     "react-toastify": "^9.1.1",
     "stripe": "^11.11.0"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-react": "^7.32.2"
   }
 }

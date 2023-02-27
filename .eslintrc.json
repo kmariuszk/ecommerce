@@ -1,3 +1,12 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "airbnb",
+  "rules": {
+    "linebreak-style": "off",
+    "no-underscore-dangle": "off",
+    "react/prop-types": "off",
+    "react/no-array-index-key": "off",
+    "react/jsx-no-constructed-context-values": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-undef": "off"
+  }
 }

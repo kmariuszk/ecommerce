@@ -275,7 +275,7 @@ body {
     box-shadow: 0 0 11px rgba(179, 179, 179, 0.743);
 }
 
- .categoryCard--card {
+.categoryCard--card {
     text-decoration: none;
     color: black;
     display: flex;
@@ -808,6 +808,7 @@ body {
     padding: 210px;
     display: flex;
     justify-content: center;
+    line-height: 40px;
 }
 
 .success {
@@ -820,6 +821,23 @@ body {
 }
 
 .success--icon {
-    color:rgb(49, 168, 49);
+    color: rgb(49, 168, 49);
     font-size: 48px;
+}
+
+.success--icon.canceled {
+    color: rgb(168, 49, 49);
+}
+
+.success--btn {
+    width: 200px;
+
+    padding: 10px 20px;
+    background-color: #2d83ca;
+    color: white;
+    border: none;
+    margin-top: 40px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
 }

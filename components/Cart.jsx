@@ -1,6 +1,8 @@
-import React, { useRef } from 'react'
-import Link from 'next/Link';
-import { AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping, AiOutlineShop } from 'react-icons/ai';
+import React, { useRef } from 'react';
+import Link from 'next/link';
+import {
+  AiOutlineMinus, AiOutlinePlus, AiOutlineLeft, AiOutlineShopping,
+} from 'react-icons/ai';
 import { TiDeleteOutline } from 'react-icons/ti';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
@@ -8,16 +10,21 @@ import Image from 'next/image';
 import { useStateContext } from '../context/StateContext';
 import getStripe from '../lib/getStripe';
 
-const myLoader = ({ src, width, quality }) => {
-  return `${src}?w=${width}&q=${quality || 75}`
-}
+const myLoader = ({ src, width, quality }) => `${src}?w=${width}&q=${quality || 75}`;
 
 /**
  * Cart component; responsible for logic and display of the cart in the application.
  */
-const Cart = () => {
+function Cart() {
   const cartRef = useRef();
-  const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove } = useStateContext();
+  const {
+    totalPrice,
+    totalQuantities,
+    cartItems,
+    setShowCart,
+    toggleCartItemQuantity,
+    onRemove,
+  } = useStateContext();
 
   const handleCheckout = async () => {
     const stripe = await getStripe();
@@ -27,7 +34,7 @@ const Cart = () => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({cartItems}),
+      body: JSON.stringify({ cartItems }),
     });
 
     if (response.statusCode === 500) return;
@@ -37,13 +44,13 @@ const Cart = () => {
     toast.loading('Redirecting...');
 
     stripe.redirectToCheckout({ sessionId: data.id });
-  }
+  };
 
   return (
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
 
-        {/* 
+        {/*
           Display / hide cart.
         */}
         <button
@@ -53,10 +60,14 @@ const Cart = () => {
         >
           <AiOutlineLeft />
           <span className="heading">Your cart</span>
-          <span className="cart-num-items">({totalQuantities})</span>
+          <span className="cart-num-items">
+            (
+            {totalQuantities}
+            )
+          </span>
         </button>
 
-        {/* 
+        {/*
           When cart is empty.
         */}
         {cartItems.length === 0 && (
@@ -75,8 +86,7 @@ const Cart = () => {
           </div>
         )}
 
-
-        {/* 
+        {/*
           When cart is not empty.
         */}
         <div className="product-container">
@@ -86,20 +96,24 @@ const Cart = () => {
                 loader={myLoader}
                 src={item.imagesLinks[0]}
                 className="cart-product-image"
-                alt='product'
+                alt="product"
                 width={180}
                 height={150}
               />
               <div className="item-desc">
                 <div className="flex top">
                   <h5>{item.name}</h5>
-                  <h4>${item.price}</h4>
+                  <h4>
+                    $
+                    {item.price}
+                  </h4>
                 </div>
                 <div className="flex bottom">
                   <p className="quantity-desc">
                     <span
+                      role="presentation"
                       className="minus"
-                      onClick={() => toggleCartItemQuantity(item._id, "dec")}
+                      onClick={() => toggleCartItemQuantity(item._id, 'dec')}
                     >
                       <AiOutlineMinus />
                     </span>
@@ -107,8 +121,9 @@ const Cart = () => {
                       {item.quantity}
                     </span>
                     <span
+                      role="presentation"
                       className="plus"
-                      onClick={() => toggleCartItemQuantity(item._id, "inc")}
+                      onClick={() => toggleCartItemQuantity(item._id, 'inc')}
                     >
                       <AiOutlinePlus />
                     </span>
@@ -130,13 +145,15 @@ const Cart = () => {
           <div className="cart-bottom">
             <div className="total">
               <h3>Subtotal: </h3>
-              <h3>${totalPrice}</h3>
+              <h3>
+                $
+                {totalPrice}
+              </h3>
             </div>
             <div className="btn-container">
               <button
                 type="button"
                 className="btn"
-                // TODO: Add payment method
                 onClick={handleCheckout}
               >
                 CHECKOUT
@@ -147,7 +164,7 @@ const Cart = () => {
 
       </div>
     </div>
-  )
+  );
 }
 
-export default Cart
+export default Cart;
