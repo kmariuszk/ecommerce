@@ -6,7 +6,7 @@ import ProductCard from '../../components/ProductCard';
 import { useStateContext } from '../../context/StateContext';
 
 const differentSorts = ['Price - high to low', 'Price - low to high'];
-const emptyListText = 'Sorry, we couldn&apos;t find any products that match your filters. Please try broadening your search criteria.';
+const emptyListText = 'Sorry, we couldn\'t find any products that match your filters. Please try broadening your search criteria.';
 
 const findUniqueBrands = (products) => [...new Set(products.map((product) => product.brand))];
 
