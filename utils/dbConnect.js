@@ -1,12 +1,13 @@
-import mongoose, { connection } from 'mongoose';
+import mongoose from 'mongoose';
 
-const connecion = {};
+const connection = {};
 
 async function dbConnect() {
     if (connection.isConnected) {
         return;
     }
 
+    // Mongoose: the `strictQuery` option will be switched back to `false` by default in Mongoose 7.
     mongoose.set('strictQuery', true);
 
     const db = await mongoose.connect(process.env.MONGO_URI, {

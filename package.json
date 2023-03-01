@@ -10,11 +10,21 @@
   },
   "dependencies": {
     "@next/font": "13.1.4",
+    "@stripe/stripe-js": "^1.46.0",
     "eslint": "8.32.0",
     "eslint-config-next": "13.1.4",
+    "isomorphic-unfetch": "^4.0.2",
     "mongoose": "^6.8.4",
-    "next": "13.1.4",
+    "next": "^13.1.4",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-hot-toast": "^2.4.0",
+    "react-icons": "^4.7.1",
+    "react-toastify": "^9.1.1",
+    "stripe": "^11.11.0"
+  },
+  "devDependencies": {
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-react": "^7.32.2"
   }
 }
