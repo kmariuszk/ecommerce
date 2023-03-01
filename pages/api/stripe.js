@@ -1,4 +1,4 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 /**
  * Function needed to connect application to Stripe payment system.
@@ -30,7 +30,7 @@ export default async function handler(req, res) {
           quantity: item.quantity,
         })),
         success_url: `${req.headers.origin}/success?success=true`,
-        cancel_url: `${req.headers.origin}/sucess?success=false`,
+        cancel_url: `${req.headers.origin}/success?success=false`,
       };
 
       // Create Checkout Sessions from body params.
