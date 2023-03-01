@@ -68,10 +68,10 @@ function Index({ products, categories }) {
 }
 
 Index.getInitialProps = async () => {
-  const productsRes = await fetch('http://localhost:3000/api/products');
+  const productsRes = await fetch('https://ecommerce-zeta-jade.vercel.app/api/products');
   const { data: products } = await productsRes.json();
 
-  const categoriesRes = await fetch('http://localhost:3000/api/categories');
+  const categoriesRes = await fetch('https://ecommerce-zeta-jade.vercel.app/api/categories');
   const { data: categories } = await categoriesRes.json();
 
   return { products, categories };
