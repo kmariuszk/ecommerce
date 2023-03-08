@@ -245,10 +245,10 @@ function Products({ products, categories }) {
 }
 
 Products.getInitialProps = async () => {
-  const productsRes = await fetch('https://ecommerce-zeta-jade.vercel.app/api/products');
+  const productsRes = await fetch('http://localhost:3000/api/products');
   let { data: products } = await productsRes.json();
 
-  const categoriesRes = await fetch('https://ecommerce-zeta-jade.vercel.app/api/categories');
+  const categoriesRes = await fetch('http://localhost:3000/api/categories');
   const { data: categories } = await categoriesRes.json();
 
   products = products.map((product) => ({

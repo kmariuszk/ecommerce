@@ -144,10 +144,10 @@ function Product({ product }) {
 }
 
 Product.getInitialProps = async ({ query: { id } }) => {
-  const productRes = await fetch(`https://ecommerce-zeta-jade.vercel.app/api/products/${id}`);
+  const productRes = await fetch(`http://localhost:3000/api/products/${id}`);
   const { data: product } = await productRes.json();
 
-  const categoryRes = await fetch(`https://ecommerce-zeta-jade.vercel.app/api/categories/${product.category}`);
+  const categoryRes = await fetch(`http://localhost:3000/api/categories/${product.category}`);
   const { data: categoryName } = await categoryRes.json();
 
   product.category = categoryName;

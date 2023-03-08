@@ -99,6 +99,10 @@ function Cart() {
                 alt="product"
                 width={180}
                 height={150}
+                style={{
+                  objectFit: 'contain',
+                  objectPosition: '50% 50%',
+                }}
               />
               <div className="item-desc">
                 <div className="flex top">
