@@ -1,10 +1,5 @@
 # TECH-HUB
 
-### TO-DO
-
-- fully deploy
-- finish the documentation
-
 ## Overview
 
 ![Hero](/screenshots/home-hero.png "Screenshot of the hero section of the home screen")
